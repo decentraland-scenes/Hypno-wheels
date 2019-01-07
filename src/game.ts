@@ -33,8 +33,8 @@ engine.addSystem(new RotatorSystem())
 
 // Background scenery entity
 let stage = new Entity()
-stage.set(new GLTFShape("models/Theatre.gltf"))
-stage.set(new Transform({
+stage.add(new GLTFShape("models/Theatre.gltf"))
+stage.add(new Transform({
   position: new Vector3(5, 0, 5),
   rotation: Quaternion.Euler(0, 90, 0)
 }))
@@ -46,8 +46,8 @@ CylinderWCollisions.withCollisions = true
 
 // Create wheel entities
 let wheel1 = new Entity()
-wheel1.set(CylinderWCollisions)
-wheel1.set(new Transform({
+wheel1.add(CylinderWCollisions)
+wheel1.add(new Transform({
   position: new Vector3(3, 2, 6),
   rotation: Quaternion.Euler(90, 0, 0),
   scale: new Vector3(1, 0.05, 1)
@@ -55,8 +55,8 @@ wheel1.set(new Transform({
 engine.addEntity(wheel1)
 
 let wheel2 = new Entity()
-wheel2.set(CylinderWCollisions)
-wheel2.set(new Transform({
+wheel2.add(CylinderWCollisions)
+wheel2.add(new Transform({
   position: new Vector3(7, 2, 6),
   rotation: Quaternion.Euler(90, 0, 0),
   scale: new Vector3(1, 0.05, 1)
@@ -68,18 +68,18 @@ let SpiralMaterial = new Material()
 SpiralMaterial.albedoTexture = "materials/hypno-wheel.png"
 
 // Add material to wheels
-wheel1.set(SpiralMaterial)
-wheel2.set(SpiralMaterial)
+wheel1.add(SpiralMaterial)
+wheel2.add(SpiralMaterial)
 
 // Add the custom component to the wheels
-wheel1.set(new WheelSpin())
-wheel2.set(new WheelSpin())
+wheel1.add(new WheelSpin())
+wheel2.add(new WheelSpin())
 
 // Change the direction for wheel2 (wheel1 is left with the default direction `Up`)
 wheel2.get(WheelSpin).direction = Vector3.Down()
 
 // Set the click behavior for the wheels
-wheel1.set(
+wheel1.add(
   new OnClick(e => {
     let spin = wheel1.get(WheelSpin)
     if (!spin.active){
@@ -91,7 +91,7 @@ wheel1.set(
   })
 )
 
-wheel2.set(
+wheel2.add(
   new OnClick(e => {
     let spin = wheel2.get(WheelSpin)
     if (!spin.active){
