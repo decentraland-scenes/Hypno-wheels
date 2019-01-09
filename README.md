@@ -11,9 +11,9 @@ This simple scene features a couple of wheels that you can spin by clicking them
 
 ![](screenshot/screenshot.png)
 
-<!--
-[Explore the scene](): this link takes you to a copy of the scene deployed to a remote server where you can interact with it just as if you were running `dcl start` locally.
--->
+
+[Explore the scene](https://hypno-wheels-owyfnqfimw.now.sh/?position=0%2C-1): this link takes you to a copy of the scene deployed to a remote server where you can interact with it just as if you were running `dcl start` locally.
+
 
 **Install the CLI**
 
