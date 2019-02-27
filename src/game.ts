@@ -31,11 +31,11 @@ export class RotatorSystem implements ISystem {
 engine.addSystem(new RotatorSystem())
 
 
-// Background scenery entity
+// Environment
 let stage = new Entity()
 stage.add(new GLTFShape("models/Theatre.gltf"))
 stage.add(new Transform({
-  position: new Vector3(5, 0, 5),
+  position: new Vector3(8, 0, 8),
   rotation: Quaternion.Euler(0, 90, 0)
 }))
 engine.addEntity(stage)
@@ -48,7 +48,7 @@ CylinderWCollisions.withCollisions = true
 let wheel1 = new Entity()
 wheel1.add(CylinderWCollisions)
 wheel1.add(new Transform({
-  position: new Vector3(3, 2, 6),
+  position: new Vector3(6, 2, 9),
   rotation: Quaternion.Euler(90, 0, 0),
   scale: new Vector3(1, 0.05, 1)
 }))
@@ -57,7 +57,7 @@ engine.addEntity(wheel1)
 let wheel2 = new Entity()
 wheel2.add(CylinderWCollisions)
 wheel2.add(new Transform({
-  position: new Vector3(7, 2, 6),
+  position: new Vector3(10, 2, 9),
   rotation: Quaternion.Euler(90, 0, 0),
   scale: new Vector3(1, 0.05, 1)
 }))
@@ -80,7 +80,7 @@ wheel2.get(WheelSpin).direction = Vector3.Down()
 
 // Set the click behavior for the wheels
 wheel1.add(
-  new OnClick(e => {
+  new OnPointerDown(e => {
     let spin = wheel1.get(WheelSpin)
     if (!spin.active){
       spin.active = true
@@ -92,7 +92,7 @@ wheel1.add(
 )
 
 wheel2.add(
-  new OnClick(e => {
+  new OnPointerDown(e => {
     let spin = wheel2.get(WheelSpin)
     if (!spin.active){
       spin.active = true
