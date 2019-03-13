@@ -36,7 +36,7 @@ let stage = new Entity()
 stage.addComponent(new GLTFShape("models/Theatre.glb"))
 stage.addComponent(new Transform({
   position: new Vector3(8, 0, 8),
-  rotation: Quaternion.Euler(0, 90, 0)
+  rotation: Quaternion.Euler(0, 270, 0)
 }))
 engine.addEntity(stage)
 
