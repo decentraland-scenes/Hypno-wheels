@@ -63,13 +63,16 @@ wheel2.addComponent(new Transform({
 }))
 engine.addEntity(wheel2)
 
+// Create texture
+const spiralTexture = new Texture("materials/hypno-wheel.png")
+
 // Create material
-let SpiralMaterial = new Material()
-SpiralMaterial.albedoTexture = "materials/hypno-wheel.png"
+let spiralMaterial = new Material()
+spiralMaterial.albedoTexture = spiralTexture
 
 // Add material to wheels
-wheel1.addComponent(SpiralMaterial)
-wheel2.addComponent(SpiralMaterial)
+wheel1.addComponent(spiralMaterial)
+wheel2.addComponent(spiralMaterial)
 
 // Add the custom component to the wheels
 wheel1.addComponent(new WheelSpin())
