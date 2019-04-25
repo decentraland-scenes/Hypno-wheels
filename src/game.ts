@@ -16,8 +16,8 @@ export class RotatorSystem implements ISystem {
     // iterate over the wheels in the component group
     for (let wheel of wheels.entities) {
       // handy shortcuts
-      let spin = wheel.get(WheelSpin)
-      let transform = wheel.get(Transform)
+      let spin = wheel.getComponent(WheelSpin)
+      let transform = wheel.getComponent(Transform)
       // check state
       if (spin.active){
         // spin the wheel
@@ -31,12 +31,12 @@ export class RotatorSystem implements ISystem {
 engine.addSystem(new RotatorSystem())
 
 
-// Background scenery entity
+// Environment
 let stage = new Entity()
-stage.add(new GLTFShape("models/Theatre.gltf"))
-stage.add(new Transform({
-  position: new Vector3(5, 0, 5),
-  rotation: Quaternion.Euler(0, 90, 0)
+stage.addComponent(new GLTFShape("models/Theatre.glb"))
+stage.addComponent(new Transform({
+  position: new Vector3(8, 0, 8),
+  rotation: Quaternion.Euler(0, 270, 0)
 }))
 engine.addEntity(stage)
 
@@ -46,42 +46,45 @@ CylinderWCollisions.withCollisions = true
 
 // Create wheel entities
 let wheel1 = new Entity()
-wheel1.add(CylinderWCollisions)
-wheel1.add(new Transform({
-  position: new Vector3(3, 2, 6),
+wheel1.addComponent(CylinderWCollisions)
+wheel1.addComponent(new Transform({
+  position: new Vector3(6, 2, 11.9),
   rotation: Quaternion.Euler(90, 0, 0),
   scale: new Vector3(1, 0.05, 1)
 }))
 engine.addEntity(wheel1)
 
 let wheel2 = new Entity()
-wheel2.add(CylinderWCollisions)
-wheel2.add(new Transform({
-  position: new Vector3(7, 2, 6),
+wheel2.addComponent(CylinderWCollisions)
+wheel2.addComponent(new Transform({
+  position: new Vector3(10, 2, 11.9),
   rotation: Quaternion.Euler(90, 0, 0),
   scale: new Vector3(1, 0.05, 1)
 }))
 engine.addEntity(wheel2)
 
+// Create texture
+const spiralTexture = new Texture("materials/hypno-wheel.png")
+
 // Create material
-let SpiralMaterial = new Material()
-SpiralMaterial.albedoTexture = "materials/hypno-wheel.png"
+let spiralMaterial = new Material()
+spiralMaterial.albedoTexture = spiralTexture
 
 // Add material to wheels
-wheel1.add(SpiralMaterial)
-wheel2.add(SpiralMaterial)
+wheel1.addComponent(spiralMaterial)
+wheel2.addComponent(spiralMaterial)
 
 // Add the custom component to the wheels
-wheel1.add(new WheelSpin())
-wheel2.add(new WheelSpin())
+wheel1.addComponent(new WheelSpin())
+wheel2.addComponent(new WheelSpin())
 
 // Change the direction for wheel2 (wheel1 is left with the default direction `Up`)
-wheel2.get(WheelSpin).direction = Vector3.Down()
+wheel2.getComponent(WheelSpin).direction = Vector3.Down()
 
 // Set the click behavior for the wheels
-wheel1.add(
-  new OnClick(e => {
-    let spin = wheel1.get(WheelSpin)
+wheel1.addComponent(
+  new OnPointerDown(e => {
+    let spin = wheel1.getComponent(WheelSpin)
     if (!spin.active){
       spin.active = true
     } else {
@@ -91,9 +94,9 @@ wheel1.add(
   })
 )
 
-wheel2.add(
-  new OnClick(e => {
-    let spin = wheel2.get(WheelSpin)
+wheel2.addComponent(
+  new OnPointerDown(e => {
+    let spin = wheel2.getComponent(WheelSpin)
     if (!spin.active){
       spin.active = true
     } else {
