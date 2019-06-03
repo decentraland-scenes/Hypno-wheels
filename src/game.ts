@@ -83,7 +83,7 @@ wheel2.getComponent(WheelSpin).direction = Vector3.Down()
 
 // Set the click behavior for the wheels
 wheel1.addComponent(
-  new OnPointerDown(e => {
+  new OnClick(e => {
     let spin = wheel1.getComponent(WheelSpin)
     if (!spin.active){
       spin.active = true
@@ -95,7 +95,7 @@ wheel1.addComponent(
 )
 
 wheel2.addComponent(
-  new OnPointerDown(e => {
+  new OnClick(e => {
     let spin = wheel2.getComponent(WheelSpin)
     if (!spin.active){
       spin.active = true
