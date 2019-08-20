@@ -40,13 +40,10 @@ stage.addComponent(new Transform({
 }))
 engine.addEntity(stage)
 
-// Define a reusable Cylinder shape component
-let CylinderWCollisions = new CylinderShape()
-CylinderWCollisions.withCollisions = true
 
 // Create wheel entities
 let wheel1 = new Entity()
-wheel1.addComponent(CylinderWCollisions)
+wheel1.addComponent(new CylinderShape())
 wheel1.addComponent(new Transform({
   position: new Vector3(6, 2, 11.9),
   rotation: Quaternion.Euler(90, 0, 0),
@@ -55,7 +52,7 @@ wheel1.addComponent(new Transform({
 engine.addEntity(wheel1)
 
 let wheel2 = new Entity()
-wheel2.addComponent(CylinderWCollisions)
+wheel2.addComponent(new CylinderShape())
 wheel2.addComponent(new Transform({
   position: new Vector3(10, 2, 11.9),
   rotation: Quaternion.Euler(90, 0, 0),
